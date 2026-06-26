@@ -1,0 +1,7131 @@
+{
+  "file_info": {
+    "file_path": "online_shopping_analytics\\twb-twbx\\online_shopping_analytics.twb",
+    "file_name": "online_shopping_analytics.twb"
+  },
+  "datasources": [
+    {
+      "name": "federated.0azkfh10sc6pfs0zoxfkw0pwlicc",
+      "connection": {
+        "name": "federated",
+        "dbms": "federated",
+        "server": "localhost",
+        "database": "",
+        "schema": null,
+        "port": null
+      },
+      "tables": [],
+      "joins": [],
+      "calculated_fields": [
+        {
+          "name": "Calculation_1890948924302123009",
+          "caption": "Total Customers",
+          "role": "measure",
+          "datatype": "integer",
+          "calculation": "COUNTD([Customer_ID])",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_1890948924302376962",
+          "caption": "Total Units Sold",
+          "role": "measure",
+          "datatype": "integer",
+          "calculation": "SUM(Quantity)",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_2232659546626289668",
+          "caption": "Calculation1",
+          "role": "measure",
+          "datatype": "real",
+          "calculation": "// Calculated Field: Most Profitable Product\r\n{ FIXED [Product_Description] : SUM([Quantity] * [Avg_Price]) }",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_2232659546737020939",
+          "caption": "Used Coupons",
+          "role": "measure",
+          "datatype": "integer",
+          "calculation": "IF ([Coupon_Status] IN ('Used')) then 1 else 0 END",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_300615303085158406",
+          "caption": "Top 10 Filter",
+          "role": "measure",
+          "datatype": "boolean",
+          "calculation": "INDEX() <= 10",
+          "is_calculated": true,
+          "aggregation": "nominal"
+        },
+        {
+          "name": "Calculation_42221277663760386",
+          "caption": "Average Transactional Value (ATV)",
+          "role": "measure",
+          "datatype": "real",
+          "calculation": "[Calculation_816277463579885569]/[Calculation_1890948924302376962]",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_42221277678399500",
+          "caption": "Average Tenure",
+          "role": "measure",
+          "datatype": "integer",
+          "calculation": "// Calculated Field: Average Tenure (Months)\r\n{ FIXED [Customer_ID] : SUM([Tenure_Months]) }",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_816277463579885569",
+          "caption": "Total Sales (USD)",
+          "role": "measure",
+          "datatype": "real",
+          "calculation": "SUM([Avg_Price] * [Quantity])",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        },
+        {
+          "name": "Calculation_950259549625729025",
+          "caption": "Tenure Range",
+          "role": "dimension",
+          "datatype": "string",
+          "calculation": "IF [Tenure_Months] <= 12 THEN '0-12 months'\r\nELSEIF [Tenure_Months] <= 24 THEN '13-24 months'\r\nELSEIF [Tenure_Months] <= 36 THEN '25-36 months'\r\nELSE 'Over 36 months'\r\nEND",
+          "is_calculated": true,
+          "aggregation": "nominal"
+        },
+        {
+          "name": "Top 10 Filter (copy)_42221277683306509",
+          "caption": "Top 5 Filter",
+          "role": "measure",
+          "datatype": "boolean",
+          "calculation": "INDEX() <= 5",
+          "is_calculated": true,
+          "aggregation": "nominal"
+        },
+        {
+          "name": "Top 5 Filter (copy)_2232659546626781191",
+          "caption": "Top 1 Filter",
+          "role": "measure",
+          "datatype": "boolean",
+          "calculation": "INDEX() <= 1",
+          "is_calculated": true,
+          "aggregation": "nominal"
+        },
+        {
+          "name": "Used Coupons (copy)_2232659546740482060",
+          "caption": "Clicked Coupons",
+          "role": "measure",
+          "datatype": "integer",
+          "calculation": "IF ([Coupon_Status] IN ('Clicked')) then 1 else 0 END",
+          "is_calculated": true,
+          "aggregation": "quantitative"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "total_datasources": 1,
+    "datasources": [
+      {
+        "name": "federated.0azkfh10sc6pfs0zoxfkw0pwlicc",
+        "connection": "federated",
+        "tables": 0,
+        "table_names": [],
+        "joins": 0,
+        "calculated_fields": 12,
+        "total_columns": 0
+      }
+    ]
+  },
+  "metadata": {
+    "dashboards": [
+      {
+        "name": "Dashboard 1: Customer Demographics",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "Customer Demographics (Gender Distrbution by Location)",
+          "Customer Distribution by Gender and Tenure Range"
+        ]
+      },
+      {
+        "name": "Dashboard 2: Sales Analysis",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "Average Discount (%) vs Total Units Sold by Month",
+          "Total Sales vs Total Units Sold (%) by Product Category",
+          "Transactional Pattern throughout the Year",
+          "Treemap of Product Categories"
+        ]
+      },
+      {
+        "name": "Dashboard 3: Location Analysis",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "Geographic Revenue Distribution",
+          "Monthly Total Spending Comparison by Location",
+          "Total Spending Distribution Across Locations",
+          "Total Spending Distribution Across Locations and Product Categories"
+        ]
+      },
+      {
+        "name": "Dashboard 4: Consumer Spending",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "Highest Spending Consumer (Top 10)",
+          "Product Breakdown of Highest Spending Consumer(s)",
+          "Sales and Quantity Breakdown by Product"
+        ]
+      },
+      {
+        "name": "Dashboard 5: Coupon Engagement",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "Coupon Engagement Analysis",
+          "Coupon Engagement Trends by Product Category"
+        ]
+      },
+      {
+        "name": "Online Shopping Insights Hub v2",
+        "dimensions": {
+          "width": null,
+          "height": null
+        },
+        "worksheets_used": [
+          "BANs/KPIs",
+          "Coupon Engagement Analysis",
+          "Coupon Engagement Trends by Product Category",
+          "Customer Demographics (Gender Distrbution by Location)",
+          "Customer Distribution by Gender and Tenure Range",
+          "Geographic Revenue Distribution",
+          "Highest Spending Consumer (Top 10)",
+          "Monthly Total Spending Comparison by Location",
+          "Most Profitable Product (SKU)",
+          "Product Breakdown of Highest Spending Consumer(s)",
+          "Sales and Quantity Breakdown by Product",
+          "Total Sales vs Total Units Sold (%) by Product Category",
+          "Total Spending Distribution Across Locations and Product Categories",
+          "Transactional Pattern throughout the Year"
+        ]
+      }
+    ],
+    "worksheets": [
+      {
+        "name": "Average Discount (%) vs Total Units Sold by Month",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      },
+      {
+        "name": "BANs/KPIs",
+        "charts": [
+          "other/unknown"
+        ]
+      },
+      {
+        "name": "Coupon Engagement Analysis",
+        "charts": [
+          "bar"
+        ]
+      },
+      {
+        "name": "Coupon Engagement Trends by Product Category",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      },
+      {
+        "name": "Customer Demographics (Gender Distrbution by Location)",
+        "charts": [
+          "bar"
+        ]
+      },
+      {
+        "name": "Customer Distribution by Gender and Tenure Range",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      },
+      {
+        "name": "Geographic Revenue Distribution",
+        "charts": [
+          "pie"
+        ]
+      },
+      {
+        "name": "Highest Spending Consumer (Top 10)",
+        "charts": [
+          "bar"
+        ]
+      },
+      {
+        "name": "Monthly Total Spending Comparison by Location",
+        "charts": [
+          "line"
+        ]
+      },
+      {
+        "name": "Most Profitable Product (SKU)",
+        "charts": [
+          "line"
+        ]
+      },
+      {
+        "name": "Product Breakdown of Highest Spending Consumer(s)",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      },
+      {
+        "name": "Sales and Quantity Breakdown by Product",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      },
+      {
+        "name": "Total Sales vs Total Units Sold (%) by Product Category",
+        "charts": [
+          "bar"
+        ]
+      },
+      {
+        "name": "Total Spending Distribution Across Locations",
+        "charts": [
+          "line"
+        ]
+      },
+      {
+        "name": "Total Spending Distribution Across Locations and Product Categories",
+        "charts": [
+          "line"
+        ]
+      },
+      {
+        "name": "Transactional Pattern throughout the Year",
+        "charts": [
+          "line"
+        ]
+      },
+      {
+        "name": "Treemap of Product Categories",
+        "charts": [
+          "bar",
+          "line"
+        ]
+      }
+    ],
+    "worksheet_details": [
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#B37D54",
+          "#C5854D",
+          "#D502CE",
+          "#a0cbe8"
+        ],
+        "fields_used": [
+          "[Discount_pct]",
+          "[Month]",
+          "[Quantity]",
+          "[avg:Discount_pct:qk]",
+          "[none:Month:nk]",
+          "[sum:Quantity:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Discount_pct]",
+          "[avg:Discount_pct:qk]",
+          "[sum:Quantity:qk]"
+        ]
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "chart_types": [
+          "other/unknown"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#189094",
+          "#237696",
+          "#422212",
+          "#463579",
+          "#522143",
+          "#55AC63",
+          "#776637",
+          "#776783",
+          "#816277",
+          "#885569",
+          "#892430",
+          "#8C5067"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_1890948924302376962]",
+          "[Calculation_42221277663760386]",
+          "[Calculation_42221277678399500]",
+          "[Calculation_816277463579885569]",
+          "[Customer_ID]",
+          "[Quantity]",
+          "[Tenure_Months]",
+          "[sum:Calculation_42221277678399500:qk]",
+          "[usr:Calculation_1890948924302376962:qk]",
+          "[usr:Calculation_42221277663760386:qk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]",
+          "[sum:Calculation_42221277678399500:qk]"
+        ]
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "chart_types": [
+          "bar"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "green_gold_10_0"
+        ],
+        "colors": [
+          "#19A9EC",
+          "#6EF71F",
+          "#82C8FE"
+        ],
+        "fields_used": [
+          "[Coupon_Status]",
+          "[Month]",
+          "[cnt:Coupon_Status:qk]",
+          "[none:Coupon_Status:nk]",
+          "[none:Month:nk]",
+          "[pcto:cnt:Coupon_Status:qk:4]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": null
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "green_10_0"
+        ],
+        "colors": [
+          "#048206",
+          "#158406",
+          "#194872",
+          "#223265",
+          "#300615",
+          "#303085",
+          "#57B159",
+          "#702093",
+          "#954673",
+          "#954674",
+          "#D61FF9"
+        ],
+        "fields_used": [
+          "[Calculation_2232659546737020939]",
+          "[Calculation_300615303085158406]",
+          "[Coupon_Status]",
+          "[Product_Category]",
+          "[Used Coupons (copy)_2232659546740482060]",
+          "[none:Product_Category:nk]",
+          "[sum:Calculation_2232659546737020939:qk]",
+          "[sum:Used Coupons (copy)_2232659546740482060:qk]",
+          "[usr:Calculation_300615303085158406:nk:2]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[sum:Calculation_2232659546737020939:qk]",
+          "[sum:Used Coupons (copy)_2232659546740482060:qk]"
+        ]
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "chart_types": [
+          "bar"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#199485",
+          "#23DBD5",
+          "#39AC11",
+          "#4CE895",
+          "#6749D1",
+          "#703149",
+          "#7BBE39",
+          "#C279A0",
+          "#C687E4",
+          "#E5BE67"
+        ],
+        "fields_used": [
+          "[Gender]",
+          "[Location]",
+          "[__tableau_internal_object_id__].[cnt:Customer_23DBD5C279A04CE8956749D17BBE397C:qk]",
+          "[none:Gender:nk]",
+          "[none:Location:nk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": null
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#000000",
+          "#01B402",
+          "#23DBD5",
+          "#45B13F",
+          "#4CE895",
+          "#549625",
+          "#6749D1",
+          "#729025",
+          "#75a1c7",
+          "#7BBE39",
+          "#950259",
+          "#C279A0",
+          "#DFEDB0"
+        ],
+        "fields_used": [
+          "[Calculation_950259549625729025]",
+          "[Gender]",
+          "[Tenure_Months]",
+          "[__tableau_internal_object_id__].[cnt:Customer_23DBD5C279A04CE8956749D17BBE397C:qk]",
+          "[none:Calculation_950259549625729025:nk]",
+          "[none:Gender:nk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": null
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "chart_types": [
+          "pie"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#3E0EDE",
+          "#463579",
+          "#527237",
+          "#534523",
+          "#7746E1",
+          "#816277",
+          "#885569",
+          "#BA4950"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Location]",
+          "[Quantity]",
+          "[none:Location:nk]",
+          "[pcto:usr:Calculation_816277463579885569:qk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "chart_types": [
+          "bar"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#0A6088",
+          "#158406",
+          "#300615",
+          "#303085",
+          "#463579",
+          "#816277",
+          "#885569",
+          "#A9ADF7",
+          "#AA9E72"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_300615303085158406]",
+          "[Calculation_816277463579885569]",
+          "[Customer_ID]",
+          "[Quantity]",
+          "[none:Customer_ID:ok]",
+          "[usr:Calculation_300615303085158406:nk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "chart_types": [
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#000000",
+          "#463579",
+          "#4C6E24",
+          "#5673FF",
+          "#816277",
+          "#885569",
+          "#A7326A"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Location]",
+          "[Month]",
+          "[Quantity]",
+          "[none:Location:nk]",
+          "[none:Month:nk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "chart_types": [
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#000000",
+          "#223265",
+          "#628966",
+          "#678119",
+          "#954662",
+          "#D17463",
+          "#F15BCC",
+          "#FC9790",
+          "#ffffff"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_2232659546626289668]",
+          "[Product_Description]",
+          "[Product_SKU (Product)]",
+          "[Quantity]",
+          "[Top 5 Filter (copy)_2232659546626781191]",
+          "[none:Product_Description:nk]",
+          "[none:Product_SKU (Product):nk]",
+          "[sum:Calculation_2232659546626289668:qk]",
+          "[usr:Top 5 Filter (copy)_2232659546626781191:nk:1]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]",
+          "[sum:Calculation_2232659546626289668:qk]"
+        ]
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "blue_teal_10_0"
+        ],
+        "colors": [
+          "#422212",
+          "#463579",
+          "#776833",
+          "#816277",
+          "#885569",
+          "#AE3F61",
+          "#CB7FE5",
+          "#E2E67E",
+          "#b01002"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Customer_ID]",
+          "[Product_Category]",
+          "[Quantity]",
+          "[Top 10 Filter (copy)_42221277683306509]",
+          "[none:Customer_ID:ok]",
+          "[none:Product_Category:nk]",
+          "[usr:Calculation_816277463579885569:qk]",
+          "[usr:Top 10 Filter (copy)_42221277683306509:nk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#158406",
+          "#300615",
+          "#303085",
+          "#45E533",
+          "#463579",
+          "#816277",
+          "#885569",
+          "#A6BE18",
+          "#A92492"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_300615303085158406]",
+          "[Calculation_816277463579885569]",
+          "[Product_Description]",
+          "[Quantity]",
+          "[none:Product_Description:nk]",
+          "[sum:Quantity:qk]",
+          "[usr:Calculation_300615303085158406:nk:2]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]",
+          "[sum:Quantity:qk]"
+        ]
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "chart_types": [
+          "bar"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "green_blue_diverging_10_0",
+          "red_10_0"
+        ],
+        "colors": [
+          "#046D67",
+          "#158406",
+          "#300615",
+          "#303085",
+          "#463579",
+          "#59a14f",
+          "#816277",
+          "#885569",
+          "#D2E3F8",
+          "#E9B05C"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_300615303085158406]",
+          "[Calculation_816277463579885569]",
+          "[Product_Category]",
+          "[Quantity]",
+          "[none:Product_Category:nk]",
+          "[pcto:sum:Quantity:qk]",
+          "[pcto:usr:Calculation_816277463579885569:qk]",
+          "[sum:Quantity:qk]",
+          "[usr:Calculation_300615303085158406:nk:1]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]",
+          "[pcto:sum:Quantity:qk]",
+          "[sum:Quantity:qk]"
+        ]
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "chart_types": [
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "brown_10_0"
+        ],
+        "colors": [
+          "#463579",
+          "#72B7BA",
+          "#816277",
+          "#885569",
+          "#A3413A",
+          "#A6C744"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Location]",
+          "[Quantity]",
+          "[none:Location:nk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "chart_types": [
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": null,
+        "colors": [
+          "#463579",
+          "#550000",
+          "#6943E7",
+          "#78B4AD",
+          "#816277",
+          "#882041",
+          "#885569",
+          "#C87108"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Location]",
+          "[Product_Category]",
+          "[Quantity]",
+          "[none:Location:nk]",
+          "[none:Product_Category:nk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]"
+        ]
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "chart_types": [
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "blue_10_0",
+          "green_10_0"
+        ],
+        "colors": [
+          "#24E186",
+          "#463579",
+          "#4e79a7",
+          "#59a14f",
+          "#5AE855",
+          "#74DDB3",
+          "#816277",
+          "#885569",
+          "#dfe7e8"
+        ],
+        "fields_used": [
+          "[Avg_Price]",
+          "[Calculation_816277463579885569]",
+          "[Month]",
+          "[Quantity]",
+          "[none:Month:nk]",
+          "[sum:Quantity:qk]",
+          "[usr:Calculation_816277463579885569:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[Avg_Price]",
+          "[sum:Quantity:qk]"
+        ]
+      },
+      {
+        "worksheet": "Treemap of Product Categories",
+        "chart_types": [
+          "bar",
+          "line"
+        ],
+        "data_sources": [
+          "federated.0azkfh10sc6pfs0zoxfkw0pwlicc"
+        ],
+        "palettes": [
+          "purple_10_0"
+        ],
+        "colors": [
+          "#2AB56A",
+          "#DCBD16",
+          "#E6C4A5"
+        ],
+        "fields_used": [
+          "[Product_Category]",
+          "[Quantity]",
+          "[none:Product_Category:nk]",
+          "[sum:Quantity:qk]"
+        ],
+        "derived_metrics": null,
+        "is_kpi_like": false,
+        "kpi_fields": [
+          "[sum:Quantity:qk]"
+        ]
+      }
+    ],
+    "column_usage": [
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Discount_pct",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Month",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "avg:Discount_pct:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Month:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Average Discount (%) vs Total Units Sold by Month",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_1890948924302376962",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_42221277663760386",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_42221277678399500",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Customer_ID",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Tenure_Months",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Calculation_42221277678399500:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_1890948924302376962:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_42221277663760386:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "BANs/KPIs",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Coupon_Status",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Month",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "cnt:Coupon_Status:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Coupon_Status:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Month:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Analysis",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "pcto:cnt:Coupon_Status:qk:4",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_2232659546737020939",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_300615303085158406",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Coupon_Status",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Category",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Used Coupons (copy)_2232659546740482060",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Category:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Calculation_2232659546737020939:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Used Coupons (copy)_2232659546740482060:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Coupon Engagement Trends by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_300615303085158406:nk:2",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Gender",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Location",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "datasource": null,
+        "table_hint": "__tableau_internal_object_id__",
+        "table_match": null,
+        "column": "cnt:Customer_23DBD5C279A04CE8956749D17BBE397C:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Gender:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Demographics (Gender Distrbution by Location)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Location:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_950259549625729025",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Gender",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Tenure_Months",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": "__tableau_internal_object_id__",
+        "table_match": null,
+        "column": "cnt:Customer_23DBD5C279A04CE8956749D17BBE397C:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Calculation_950259549625729025:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Customer Distribution by Gender and Tenure Range",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Gender:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Location",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Location:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "pcto:usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Geographic Revenue Distribution",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_300615303085158406",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Customer_ID",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Customer_ID:ok",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_300615303085158406:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Highest Spending Consumer (Top 10)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Location",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Month",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Location:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Month:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Monthly Total Spending Comparison by Location",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_2232659546626289668",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Description",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_SKU (Product)",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Top 5 Filter (copy)_2232659546626781191",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Description:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_SKU (Product):nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Calculation_2232659546626289668:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Most Profitable Product (SKU)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Top 5 Filter (copy)_2232659546626781191:nk:1",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Customer_ID",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Category",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Top 10 Filter (copy)_42221277683306509",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Customer_ID:ok",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Category:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Product Breakdown of Highest Spending Consumer(s)",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Top 10 Filter (copy)_42221277683306509:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_300615303085158406",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Description",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Description:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_300615303085158406:nk:2",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Sales and Quantity Breakdown by Product",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_300615303085158406",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Category",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Category:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "pcto:sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "pcto:usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_300615303085158406:nk:1",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Sales vs Total Units Sold (%) by Product Category",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Location",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Location:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Location",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Category",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": null,
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Location:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Category:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Total Spending Distribution Across Locations and Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Avg_Price",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Calculation_816277463579885569",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": true
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Month",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Month:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Transactional Pattern throughout the Year",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "usr:Calculation_816277463579885569:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Treemap of Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Product_Category",
+        "role": "dimension",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Treemap of Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "Quantity",
+        "role": "measure",
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Treemap of Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "none:Product_Category:nk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      },
+      {
+        "worksheet": "Treemap of Product Categories",
+        "datasource": null,
+        "table_hint": null,
+        "table_match": null,
+        "column": "sum:Quantity:qk",
+        "role": null,
+        "aggregation": null,
+        "is_calculated": false
+      }
+    ],
+    "visual_metadata": {
+      "color_palettes": [],
+      "formatting_rules": [
+        {
+          "attr": "title",
+          "value": "Average Discount (%)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[avg:Discount_pct:qk]"
+        },
+        {
+          "attr": "title",
+          "value": "Total Units Sold",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#a0cbe8",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-field",
+          "value": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "all",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "width",
+          "value": "332",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[:Measure Names]"
+        },
+        {
+          "attr": "text-format",
+          "value": "c\"$\"#,##0,,.00M;(\"$\"#,##0,,.00M)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "n#,##0,K",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_1890948924302376962:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_42221277663760386:qk]"
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[Multiple Values]"
+        },
+        {
+          "attr": "vertical-align",
+          "value": "center",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[Multiple Values]"
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "display",
+          "value": "false",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[:Measure Names]"
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Count of Coupon Status",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[cnt:Coupon_Status:qk]"
+        },
+        {
+          "attr": "color",
+          "value": "Coupon Status",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[cnt:Coupon_Status:qk]"
+        },
+        {
+          "attr": "title",
+          "value": "Select Month",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Month:nk]"
+        },
+        {
+          "attr": "title",
+          "value": "Select Coupon Status",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Coupon_Status:nk]"
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Number of Customers",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[__tableau_internal_object_id__].[cnt:Customer_23DBD5C279A04CE8956749D17BBE397C:qk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "size",
+          "value": "1.7031491994857788",
+          "field": null
+        },
+        {
+          "attr": "width",
+          "value": "48",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Gender:nk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#75a1c7",
+          "field": null
+        },
+        {
+          "attr": "width",
+          "value": "482",
+          "field": null
+        },
+        {
+          "attr": "height",
+          "value": "460",
+          "field": null
+        },
+        {
+          "attr": "text-format",
+          "value": "c\"$\"#,##0.00;(\"$\"#,##0.00)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "p0.00%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[pcto:usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "size",
+          "value": "1.5272375345230103",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "height",
+          "value": "53",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "height",
+          "value": "41",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "color",
+          "value": "Highest Spending Consumer\n",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "1069",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "1069",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "200",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "200",
+          "field": null
+        },
+        {
+          "attr": "aspect",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "height",
+          "value": "19",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Month:nk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "mark-labels-line-first",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-last",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-min",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-max",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-scope",
+          "value": "pane",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-field",
+          "value": "",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "tick-color",
+          "value": "#00000000",
+          "field": null
+        },
+        {
+          "attr": "width",
+          "value": "490",
+          "field": null
+        },
+        {
+          "attr": "height",
+          "value": "82",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Description:nk]"
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "display",
+          "value": "false",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Description:nk]"
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "color",
+          "value": "#ffffff",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "line-pattern-only",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "div-level",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-pattern-only",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "line-pattern-only",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "stroke-size",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "line-visibility",
+          "value": "off",
+          "field": null
+        },
+        {
+          "attr": "height",
+          "value": "24",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Category:nk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "width",
+          "value": "56",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "height-header",
+          "value": "17",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "text-orientation",
+          "value": "0",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "text-orientation",
+          "value": "0",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "color",
+          "value": "Total Spending per Category",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "enabled",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "washout",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "map-style",
+          "value": "light",
+          "field": null
+        },
+        {
+          "attr": "palette",
+          "value": "tableau-map-blue-green-light",
+          "field": null
+        },
+        {
+          "attr": "geo-area-type",
+          "value": "State",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Enter: Customer ID",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "112",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "112",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "1523",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "1523",
+          "field": null
+        },
+        {
+          "attr": "aspect",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "render-fold-reversed",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Total Units Sold",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "c\"$\"#,##0.00;(\"$\"#,##0.00)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-orientation",
+          "value": "-90",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-orientation",
+          "value": "0",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Description:nk]"
+        },
+        {
+          "attr": "color",
+          "value": "Product Performance",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[:Measure Names]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-transparency",
+          "value": "65",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Total Units Sold (%)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[pcto:sum:Quantity:qk]"
+        },
+        {
+          "attr": "width",
+          "value": "64",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[pcto:sum:Quantity:qk]"
+        },
+        {
+          "attr": "title",
+          "value": "Total Sales (USD) (%)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[pcto:usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "width",
+          "value": "75",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Category:nk]"
+        },
+        {
+          "attr": "display-field-labels",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#59a14f",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#59a14f",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#59a14f",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "minwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxwidth",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-first",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-last",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-min",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-max",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "all",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-scope",
+          "value": "pane",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-field",
+          "value": "",
+          "field": null
+        },
+        {
+          "attr": "text-format",
+          "value": "C1033%",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "height",
+          "value": "476",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-first",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-last",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-min",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-max",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "all",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-scope",
+          "value": "pane",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-field",
+          "value": "",
+          "field": null
+        },
+        {
+          "attr": "minheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "maxheight",
+          "value": "-1",
+          "field": null
+        },
+        {
+          "attr": "title",
+          "value": "Total Units Sold",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]"
+        },
+        {
+          "attr": "title",
+          "value": "Total Sales (USD)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "width",
+          "value": "82",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "width",
+          "value": "82",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]"
+        },
+        {
+          "attr": "height",
+          "value": "20",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Month:nk]"
+        },
+        {
+          "attr": "render-fold-reversed",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "width",
+          "value": "82",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Month:nk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "c\"$\"#,##0,K;(\"$\"#,##0,K)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "N",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[sum:Quantity:qk]"
+        },
+        {
+          "attr": "text-format",
+          "value": "c\"$\"#,##0,.00K;(\"$\"#,##0,.00K)",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]"
+        },
+        {
+          "attr": "background-color",
+          "value": "#dfe7e87f",
+          "field": null
+        },
+        {
+          "attr": "stroke-color",
+          "value": "#59a14f4b",
+          "field": null
+        },
+        {
+          "attr": "stroke-color",
+          "value": "#4e79a74b",
+          "field": null
+        },
+        {
+          "attr": "color",
+          "value": "Performance Metric",
+          "field": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[:Measure Names]"
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#4e79a7",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#59a14f",
+          "field": null
+        },
+        {
+          "attr": "mark-transparency",
+          "value": "206",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "false",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "highlight",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "line-interpolation",
+          "value": "linear",
+          "field": null
+        },
+        {
+          "attr": "mark-markers-mode",
+          "value": "all",
+          "field": null
+        },
+        {
+          "attr": "mark-color",
+          "value": "#4e79a7",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-show",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-cull",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-first",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-line-last",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-min",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-max",
+          "value": "true",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-mode",
+          "value": "all",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-scope",
+          "value": "pane",
+          "field": null
+        },
+        {
+          "attr": "mark-labels-range-field",
+          "value": "",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "padding",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "text-align",
+          "value": "center",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "vertical-align",
+          "value": "top",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "1",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "1",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#d4d4d4",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dashed",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "solid",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "1",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "4",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "none",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "0",
+          "field": null
+        },
+        {
+          "attr": "margin",
+          "value": "8",
+          "field": null
+        },
+        {
+          "attr": "border-color",
+          "value": "#000000",
+          "field": null
+        },
+        {
+          "attr": "border-style",
+          "value": "dotted",
+          "field": null
+        },
+        {
+          "attr": "border-width",
+          "value": "2",
+          "field": null
+        }
+      ],
+      "filters": [
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[:Measure Names]",
+          "filter_type": null,
+          "values": [
+            null,
+            "\"[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]\"",
+            "\"[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_1890948924302376962:qk]\"",
+            "\"[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_42221277663760386:qk]\""
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Coupon_Status:nk]",
+          "filter_type": null,
+          "values": [
+            null
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_300615303085158406:nk:2]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_300615303085158406:nk]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Description:nk]",
+          "filter_type": null,
+          "values": [
+            "\"Nest Learning Thermostat 3rd Gen-USA - Stainless Steel\""
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Top 5 Filter (copy)_2232659546626781191:nk:1]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Customer_ID:ok]",
+          "filter_type": null,
+          "values": [
+            "15311"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Top 10 Filter (copy)_42221277683306509:nk]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_300615303085158406:nk:2]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_300615303085158406:nk:1]",
+          "filter_type": null,
+          "values": [
+            "true"
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[Inclusions (Location,Product Category)]",
+          "filter_type": null,
+          "values": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "class": "categorical",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[none:Product_Category:nk]",
+          "filter_type": null,
+          "values": [
+            null
+          ]
+        },
+        {
+          "class": "quantitative",
+          "column": "[federated.0azkfh10sc6pfs0zoxfkw0pwlicc].[usr:Calculation_816277463579885569:qk]",
+          "filter_type": null,
+          "values": []
+        }
+      ],
+      "parameters": []
+    }
+  }
+}

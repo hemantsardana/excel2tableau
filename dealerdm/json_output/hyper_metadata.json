@@ -1,0 +1,104 @@
+{
+    "federated.hyper": {
+        "public": {},
+        "Extract": {
+            "Extract": [
+                {
+                    "column_name": "\"SRC\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"EST_IHD\"",
+                    "data_type": "DATE"
+                },
+                {
+                    "column_name": "\"Dealer Name (matched)\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"MailQTY\"",
+                    "data_type": "BIG_INT"
+                },
+                {
+                    "column_name": "\"DealerOrders\"",
+                    "data_type": "BIG_INT"
+                },
+                {
+                    "column_name": "\"DealerActivations\"",
+                    "data_type": "BIG_INT"
+                },
+                {
+                    "column_name": "\"Beam_Status_Pre_P1\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P1\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P2\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P3\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P4\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P5\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P6\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P7\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P8\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Beam_Status_P9\"",
+                    "data_type": "TEXT"
+                }
+            ]
+        }
+    },
+    "TEMP_0vi1nsm1n2tt2r1gvbljj0on5zjb.hyper": {
+        "public": {},
+        "Extract": {
+            "Extract": [
+                {
+                    "column_name": "\"Ad_Group1\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Dealer Name(match)\"",
+                    "data_type": "TEXT"
+                },
+                {
+                    "column_name": "\"Count\"",
+                    "data_type": "BIG_INT"
+                },
+                {
+                    "column_name": "\"Est_IHD\"",
+                    "data_type": "DATE"
+                },
+                {
+                    "column_name": "\"Total_Calls\"",
+                    "data_type": "BIG_INT"
+                },
+                {
+                    "column_name": "\"Retailer_Cost\"",
+                    "data_type": "DOUBLE"
+                }
+            ]
+        }
+    }
+}

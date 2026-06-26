@@ -1,0 +1,187 @@
+table Transactions
+	lineageTag: a396ed74-a57e-4208-bbcd-c071126e8c95
+
+	column 'Coupon Code'
+		dataType: string
+		lineageTag: 8794d930-9719-4652-bece-14c06e4e4cb3
+		summarizeBy: none
+		sourceColumn: Coupon Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Coupon Status'
+		dataType: string
+		lineageTag: cf0509e3-024f-47d0-ac1e-43c255b6a2fa
+		summarizeBy: none
+		sourceColumn: Coupon Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID (Transactions)'
+		dataType: string
+		lineageTag: 83aafc0b-cb31-4039-99b0-aa31b421113e
+		summarizeBy: none
+		sourceColumn: Customer ID (Transactions)
+
+		changedProperty = DataType
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ce2885ac-d942-440e-8772-556a90588d09
+		summarizeBy: none
+		sourceColumn: Date
+
+		variation Variation
+			isDefault
+			relationship: b5a830d5-bbe9-4b38-9563-58f7af757d20
+			defaultHierarchy: LocalDateTable_fd95878b-61f3-4f55-962d-db5e76adc1e4.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f6dd1ed-6430-4ee9-9615-b00243ad5fb6
+		summarizeBy: sum
+		sourceColumn: Month
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product SKU'
+		dataType: string
+		lineageTag: 0e14ef3b-4d30-4880-9943-7d3a967cd0d1
+		summarizeBy: none
+		sourceColumn: Product SKU
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transaction Date'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 818f5d16-7b65-4cbf-90a9-5c1258fc92ef
+		summarizeBy: none
+		sourceColumn: Transaction Date
+
+		variation Variation
+			isDefault
+			relationship: a8cdc363-210b-4f38-b4f8-f80006c7eba4
+			defaultHierarchy: LocalDateTable_18da1e24-f57e-42f7-ba89-3b61e7baa962.'Date Hierarchy'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Transaction ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: ad31b5c4-e780-470a-bf66-2f620f668c4f
+		summarizeBy: count
+		sourceColumn: Transaction ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Transaction Key'
+		dataType: int64
+		formatString: 0
+		lineageTag: 68a84270-d31d-4c3a-8cca-86d508911d6d
+		summarizeBy: count
+		sourceColumn: Transaction Key
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Avg Price'
+		dataType: double
+		lineageTag: cd827548-52d5-4147-8046-122f071bece8
+		summarizeBy: sum
+		sourceColumn: Avg Price
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Clicked Coupons'
+		dataType: int64
+		formatString: 0
+		lineageTag: 067ecacd-9057-4bbb-8955-5ff1e197c8a1
+		summarizeBy: sum
+		sourceColumn: Clicked Coupons
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Delivery Charges'
+		dataType: double
+		lineageTag: 483b5c0d-cb06-4434-bacd-c71dd83e5342
+		summarizeBy: sum
+		sourceColumn: Delivery Charges
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Discount pct'
+		dataType: int64
+		formatString: 0
+		lineageTag: a72631a9-485b-443a-a45f-0e4ffb17a265
+		summarizeBy: sum
+		sourceColumn: Discount pct
+
+		annotation SummarizationSetBy = Automatic
+
+	column GST
+		dataType: double
+		lineageTag: 27d872bc-4796-4626-9a88-cc4a758b05fa
+		summarizeBy: sum
+		sourceColumn: GST
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 057cbde3-eaa0-4115-acd7-cdad4221cad5
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Used Coupons'
+		dataType: int64
+		formatString: 0
+		lineageTag: 302aecff-dc4c-4f05-aad2-7bdbf8b9305c
+		summarizeBy: sum
+		sourceColumn: Used Coupons
+
+		annotation SummarizationSetBy = Automatic
+
+	column Total_sales
+		dataType: double
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 44bbd7b8-e97f-43fd-bef8-715e678a3437
+		summarizeBy: sum
+		sourceColumn: Total_sales
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Transactions = m
+		mode: import
+		source =
+				let
+				    // BigQuery source: project ai-tab2looker-usc1-ri, dataset online_shopping, table transaction
+				    Source = GoogleBigQuery.Database(){[Name="ai-tab2looker-usc1-ri"]}[Data]{[Name="online_shopping"]}[Data]{[Name="transaction"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Coupon Code", type text}, {"Coupon Status", type text}, {"Customer ID (Transactions)", Int64.Type}, {"Date", type date}, {"Month", Int64.Type}, {"Product SKU", type text}, {"Transaction Date", type date}, {"Transaction ID", Int64.Type}, {"Transaction Key", Int64.Type}, {"Avg Price", type number}, {"Clicked Coupons", Int64.Type}, {"Delivery Charges", type number}, {"Discount pct", Int64.Type}, {"GST", type number}, {"Quantity", Int64.Type}, {"Used Coupons", Int64.Type}}),
+				    #"Added Custom" = Table.AddColumn(#"Changed Type", "Total_sales", each [Avg Price]*[Quantity]),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom",{{"Total_sales", type number}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,18 @@
+relationship b5a830d5-bbe9-4b38-9563-58f7af757d20
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Transactions.Date
+	toColumn: LocalDateTable_fd95878b-61f3-4f55-962d-db5e76adc1e4.Date
+
+relationship a8cdc363-210b-4f38-b4f8-f80006c7eba4
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Transactions.'Transaction Date'
+	toColumn: LocalDateTable_18da1e24-f57e-42f7-ba89-3b61e7baa962.Date
+
+relationship AutoDetected_27e962d8-7480-4b7b-bfa5-a752cd7759fa
+	fromColumn: Transactions.'Customer ID (Transactions)'
+	toColumn: Customer.'Customer ID'
+
+relationship AutoDetected_c3f9a45a-2583-44bd-9262-26acc9111e3c
+	fromColumn: Transactions.'Product SKU'
+	toColumn: Product.'Product SKU'
+

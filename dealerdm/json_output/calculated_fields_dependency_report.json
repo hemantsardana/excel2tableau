@@ -1,0 +1,668 @@
+{
+  "levels": [
+    [
+      {
+        "name": "Beam_Status_Today",
+        "caption": "Beam_Status_Today",
+        "calculation": "[Beam_Status_P9]"
+      },
+      {
+        "name": "Beam_Status_At_Time (group)",
+        "caption": null,
+        "calculation": "categorical-bin"
+      },
+      {
+        "name": "Beam_Status_Today_Final",
+        "caption": "Beam_Status_Today_Final",
+        "calculation": "categorical-bin"
+      },
+      {
+        "name": "Home",
+        "caption": "Home",
+        "calculation": "\"Home\""
+      },
+      {
+        "name": "TWG",
+        "caption": "TWG",
+        "calculation": "\"TWG Dashboard\""
+      },
+      {
+        "name": "Matchback Navigation 1",
+        "caption": "Matchback Navigation 1",
+        "calculation": "\"Matchback Dashboard 1\""
+      },
+      {
+        "name": "Matchback Navigation 2",
+        "caption": "Matchback Navigation 2",
+        "calculation": "\"Matchback Dashboard 2\""
+      },
+      {
+        "name": "DA_LKP",
+        "caption": "DA_LKP",
+        "calculation": "IF \r\n (ZN(SUM([DealerActivations])) - LOOKUP(ZN(SUM([DealerActivations])), 1)) / ABS(LOOKUP(ZN(SUM([DealerActivations])), 1)) <0 then -1 \r\nELSEIF (ZN(SUM([DealerActivations])) - LOOKUP(ZN(SUM([DealerActivations])), 1)) / ABS(LOOKUP(ZN(SUM([DealerActivations])), 1))= 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "Year",
+        "caption": "Year",
+        "calculation": "Year([Est_IHD])"
+      },
+      {
+        "name": "Cost per Call",
+        "caption": "Cost per Call",
+        "calculation": "SUM([Retailer_Cost])/SUM([Total_Calls])"
+      },
+      {
+        "name": "Resp. Rate",
+        "caption": "Resp. Rate",
+        "calculation": "SUM([Total_Calls])/SUM([Count])"
+      },
+      {
+        "name": "Year",
+        "caption": "Year",
+        "calculation": "YEAR([EST_IHD])"
+      },
+      {
+        "name": "Activation Rate",
+        "caption": "Activation Rate",
+        "calculation": "SUM([DealerActivations])/SUM([DealerOrders])"
+      },
+      {
+        "name": "Cost per Dealer Activation",
+        "caption": "Cost per Dealer Activation",
+        "calculation": "0.45*(sum([MailQTY])/SUM([DealerActivations]))"
+      },
+      {
+        "name": "Cost per Dealer Order",
+        "caption": "Cost per Dealer Order",
+        "calculation": "0.45*sum([MailQTY])/SUM([DealerOrders])"
+      },
+      {
+        "name": "Order Rate",
+        "caption": "Order Rate",
+        "calculation": "sum([DealerOrders])/sum([MailQTY])"
+      },
+      {
+        "name": "Call",
+        "caption": "Call",
+        "calculation": "\"Call\""
+      },
+      {
+        "name": "Order",
+        "caption": "Order",
+        "calculation": "\"Order\""
+      },
+      {
+        "name": "Order",
+        "caption": "Order",
+        "calculation": "\"Order\""
+      },
+      {
+        "name": "MB",
+        "caption": "MB",
+        "calculation": "\"MB1 Dashboard\""
+      },
+      {
+        "name": "CAlc_0",
+        "caption": "CAlc_0",
+        "calculation": "0"
+      },
+      {
+        "name": "DO_LKP",
+        "caption": "DO_LKP",
+        "calculation": "IF \r\n(ZN(SUM([DealerOrders])) - LOOKUP(ZN(SUM([DealerOrders])), 1)) / ABS(LOOKUP(ZN(SUM([DealerOrders])), 1)) <0 then -1 \r\nELSEIF (ZN(SUM([DealerOrders])) - LOOKUP(ZN(SUM([DealerOrders])), 1)) / ABS(LOOKUP(ZN(SUM([DealerOrders])), 1))= 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "Index",
+        "caption": "Index",
+        "calculation": "INDEX()"
+      },
+      {
+        "name": "Mail Type Aliased",
+        "caption": "Mail Type Aliased",
+        "calculation": "CASE [SRC]\r\nWHEN \"Branded\" THEN \"Branded-Saturation\"\r\nWHEN \"Branded Radius\" THEN \"Radius\"\r\nWHEN \"DealerRadius\" THEN \"Radius\"\r\nWHEN \"Generic\" THEN \"Generic-Saturation\"\r\nEND"
+      },
+      {
+        "name": "Date Range",
+        "caption": "Date Range",
+        "calculation": "[Est_IHD] >=  [Parameters].[Start Date (copy 2)] AND [Est_IHD] <= [Parameters].[Start Date_1 (copy)]"
+      },
+      {
+        "name": "Date Range",
+        "caption": "Date Range",
+        "calculation": "[EST_IHD] >=  [Parameters].[Start Date (copy 2)] AND [EST_IHD] <= [Parameters].[Start Date_1 (copy)]"
+      },
+      {
+        "name": "zero",
+        "caption": "zero",
+        "calculation": "0"
+      },
+      {
+        "name": "Month_1",
+        "caption": "Month_1",
+        "calculation": "LEFT(DATENAME(\"month\",[Est_IHD]),3)"
+      },
+      {
+        "name": "Month_1",
+        "caption": "Month_1",
+        "calculation": "LEFT(DATENAME(\"month\",[EST_IHD] ),3)"
+      },
+      {
+        "name": "Mail",
+        "caption": "Mail",
+        "calculation": "\"Mail\""
+      },
+      {
+        "name": "MQ_LKP",
+        "caption": "MQ_LKP",
+        "calculation": "IF \r\n(ZN(SUM([Count])) - LOOKUP(ZN(SUM([Count])), 1)) / ABS(LOOKUP(ZN(SUM([Count])), 1)) <0 then -1 \r\nELSEIF (ZN(SUM([Count])) - LOOKUP(ZN(SUM([Count])), 1)) / ABS(LOOKUP(ZN(SUM([Count])), 1))= 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "Cost per 1000 Pieces",
+        "caption": "Cost per 1000 Pieces",
+        "calculation": "sum([Retailer_Cost])/sum([Count])"
+      },
+      {
+        "name": "Monthly / Weekly View/BDN",
+        "caption": "Monthly / Weekly View/BDN",
+        "calculation": "CASE [Parameters].[Cost Per Call Parameter]\r\n\r\nWHEN 'QQ' THEN \"Q\" + STR(DATEPART('quarter',[Est_IHD],'Monday')) + \"'\" + RIGHT(STR(DATEPART('year',[Est_IHD],'Monday')),2) \r\n\r\nWHEN 'WW' THEN \"Wk \"+ str(DATEPART('week',[Est_IHD],'Monday')) + \"'\" + RIGHT(STR(DATEPART('year',[Est_IHD],'Monday')),2)\r\n\r\nWHEN 'MM' THEN  LEFT(DATENAME(\"month\",[Est_IHD]),3) + \"'\" + RIGHT(STR(DATEPART('year',[Est_IHD],'Monday')),2)\r\nEND"
+      },
+      {
+        "name": "Test_Date",
+        "caption": "Test_Date",
+        "calculation": "IF [EST_IHD] < #2016-01-01# THEN 'Pre 2010'\r\nELSE 'Test Not'\r\nEND"
+      },
+      {
+        "name": "KPI 1",
+        "caption": "KPI 1",
+        "calculation": "[Parameters].[Monthly / Weekly View  (copy)]"
+      },
+      {
+        "name": "Mail Qty_str",
+        "caption": "Mail Qty_str",
+        "calculation": "\"Mail Qty\""
+      },
+      {
+        "name": "Zero",
+        "caption": "Zero",
+        "calculation": "0"
+      },
+      {
+        "name": "Mail Qty_Str",
+        "caption": "Mail Qty_Str",
+        "calculation": "\"Mail Qty\""
+      },
+      {
+        "name": "test",
+        "caption": "test",
+        "calculation": "max([Est_IHD])"
+      },
+      {
+        "name": "Month",
+        "caption": "Month",
+        "calculation": "MONTH([Est_IHD])"
+      },
+      {
+        "name": "Quarter",
+        "caption": "Quarter",
+        "calculation": "DATEPART('quarter',[Est_IHD],'Monday')"
+      },
+      {
+        "name": "Hughes",
+        "caption": "Hughes",
+        "calculation": "\"HUGHES\""
+      },
+      {
+        "name": "FA",
+        "caption": "FA",
+        "calculation": "\"FA\""
+      },
+      {
+        "name": "cpd_mon",
+        "caption": "cpd_mon",
+        "calculation": "IF [Est_IHD] = { FIXED : MAX([Est_IHD])} then \"Current\"\r\nELSEIF [Est_IHD] = { FIXED : DATEADD('month',-1,MAX([Est_IHD]) )} then \"Previous\"\r\nEND"
+      },
+      {
+        "name": "index",
+        "caption": "index",
+        "calculation": "INDEX()"
+      },
+      {
+        "name": "CAlc_0",
+        "caption": "CAlc_0",
+        "calculation": "0"
+      },
+      {
+        "name": "TC_LKP",
+        "caption": "TC_LKP",
+        "calculation": "IF \r\n((ZN(SUM([Total_Calls])) - LOOKUP(ZN(SUM([Total_Calls])), 1)) / ABS(LOOKUP(ZN(SUM([Total_Calls])), 1))) <0 then -1 \r\nELSEIF ((ZN(SUM([Total_Calls])) - LOOKUP(ZN(SUM([Total_Calls])), 1)) / ABS(LOOKUP(ZN(SUM([Total_Calls])), 1)))= 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "MOY_Merge",
+        "caption": "MOY_Merge",
+        "calculation": "DATEPART(\"year\",[EST_IHD],\"Monday\")*100 + DATEPART(\"month\",[EST_IHD],\"Monday\")"
+      },
+      {
+        "name": "Beam_Status_At_Time",
+        "caption": "Beam_Status_At_Time",
+        "calculation": "//yyyy - mm - dd\r\nIF [EST_IHD] < #2018-01-04# THEN [Beam_Status_Pre_P1] //Pre P1\r\n\r\nELSEIF #2018-01-04# <= [EST_IHD] and  [EST_IHD] < #2018-04-05# THEN [Beam_Status_P1] // P1 04Jan18 - 05Apr18\r\n\r\nELSEIF #2018-04-05# <= [EST_IHD] and  [EST_IHD] < #2018-05-31# THEN [Beam_Status_P2] // P2 05Jan18 - 31May18\r\n\r\nELSEIF #2018-05-31# <= [EST_IHD] and  [EST_IHD] < #2018-08-02# THEN [Beam_Status_P3] // P3 31May18 - 02Aug18\r\n\r\nELSEIF #2018-08-02# <= [EST_IHD] and  [EST_IHD] < #2018-09-27# THEN [Beam_Status_P4] // P4 02Aug18 - 27Sep18\r\n\r\nELSEIF #2018-09-27# <= [EST_IHD] and  [EST_IHD] < #2019-01-03# THEN [Beam_Status_P5] // P5 27Sep18 - 03Jan19\r\n\r\nELSEIF #2019-01-03# <= [EST_IHD] and  [EST_IHD] < #2019-01-14# THEN [Beam_Status_P6] // P6 03Jan19 - 14Feb19\r\n\r\nELSEIF #2019-02-14# <= [EST_IHD] and  [EST_IHD] < #2019-03-28# THEN [Beam_Status_P7] // P7 14Feb19 - 28Mar19\r\n\r\nELSEIF #2019-03-28# <= [EST_IHD] and  [EST_IHD] < #2019-06-27# THEN [Beam_Status_P8] // P7 28Mar19 - 27Jun19\r\n\r\nELSEIF #2019-06-27# <= [EST_IHD] THEN [Beam_Status_P9] // P9 27Jun19 - Today\r\n\r\nEND\r\n\r\n//if ORDER_RECEIVED_DATE < \"04Jan18\"d then period=0;else;\r\n//if ORDER_RECEIVED_DATE >= \"04Jan18\"d and ORDER_RECEIVED_DATE < \"05Apr18\"d then period=1;else;\r\n//if ORDER_RECEIVED_DATE >= \"05Apr18\"d and ORDER_RECEIVED_DATE < \"31May18\"d then period=2;else;\r\n//if ORDER_RECEIVED_DATE >= \"31May18\"d and ORDER_RECEIVED_DATE < \"02Aug18\"d then period=3;else;\r\n//if ORDER_RECEIVED_DATE >= \"02Aug18\"d and ORDER_RECEIVED_DATE < \"27Sep18\"d then period=4;else;\r\n//if ORDER_RECEIVED_DATE >= \"27Sep18\"d and ORDER_RECEIVED_DATE < \"03Jan19\"d then period=5;else;\r\n//if ORDER_RECEIVED_DATE >= \"03Jan19\"d and ORDER_RECEIVED_DATE < \"14Feb19\"d then period=6;else;\r\n//if ORDER_RECEIVED_DATE >= \"14Feb19\"d then period=7;else;"
+      },
+      {
+        "name": "KPI_2",
+        "caption": "KPI_2",
+        "calculation": "CASE [Parameters].[KPI List (copy)]\r\nWHEN \"MQ\" THEN SUM([MailQTY])\r\nWHEN \"DO\" THEN SUM([DealerOrders])\r\nWHEN \"DA\" THEN SUM([DealerActivations])\r\nWHEN \"OR\" THEN sum([DealerOrders])/sum([MailQTY])\r\nWHEN \"AR\" THEN sum([DealerActivations])/sum([DealerOrders])\r\nWHEN \"CPDO\" THEN 0.45 *( SUM([MailQTY])/SUM([DealerOrders]) )\r\nEND"
+      },
+      {
+        "name": "Monthly / Weekly View",
+        "caption": "Monthly / Weekly View",
+        "calculation": "CASE [Parameters].[Cost Per Call Parameter]\r\n\r\nWHEN 'QQ' THEN \"Q\" + STR(DATEPART('quarter',[EST_IHD],'Monday'))\r\n\r\nWHEN 'WW' THEN \"Week \"+ str(DATEPART('week',[EST_IHD],'Monday')) \r\n\r\nWHEN 'MM' THEN LEFT(DATENAME(\"month\",[EST_IHD]),3)\r\n\r\nEND"
+      },
+      {
+        "name": "KPI 2",
+        "caption": "KPI 2",
+        "calculation": "[Parameters].[KPI List (copy)]"
+      },
+      {
+        "name": "Button",
+        "caption": "Button",
+        "calculation": "\"Button\""
+      },
+      {
+        "name": "KPI 3",
+        "caption": "KPI 3",
+        "calculation": "[Parameters].[KPI List 2 (copy)]"
+      },
+      {
+        "name": "Count (copy)",
+        "caption": null,
+        "calculation": "[Count]"
+      },
+      {
+        "name": "Est IHD (copy)",
+        "caption": null,
+        "calculation": "[Est_IHD]"
+      },
+      {
+        "name": "KPIs 1",
+        "caption": "KPIs 1",
+        "calculation": "CASE [Parameters].[Monthly / Weekly View  (copy)]\r\nWHEN \"CNT\" THEN SUM([Count])\r\nWHEN \"TC\" THEN SUM([Total_Calls])\r\nWHEN \"RR\" THEN SUM([Total_Calls])/SUM([Count])\r\nWHEN \"CPC\" THEN SUM([Retailer_Cost])/SUM([Total_Calls])\r\nEND"
+      },
+      {
+        "name": "Mail Type",
+        "caption": "Mail Type",
+        "calculation": "categorical-bin"
+      },
+      {
+        "name": "Mail Type (copy)",
+        "caption": null,
+        "calculation": "categorical-bin"
+      },
+      {
+        "name": "Month_end",
+        "caption": "Month_end",
+        "calculation": "(YEAR([Est_IHD])*100 )+  MONTH([Est_IHD])"
+      },
+      {
+        "name": "Month_strt",
+        "caption": "Month_strt",
+        "calculation": "(YEAR([Est_IHD])*100 )+  MONTH([Est_IHD])"
+      },
+      {
+        "name": "Monthly / Weekly View /BDN",
+        "caption": "Monthly / Weekly View /BDN",
+        "calculation": "CASE [Parameters].[Cost Per Call Parameter]\r\n\r\nWHEN 'QQ' THEN \"Q\" + STR(DATEPART('quarter',[EST_IHD],'Monday')) + \"'\" + RIGHT(STR(DATEPART('year',[EST_IHD],'Monday')),2) \r\n\r\nWHEN 'WW' THEN \"Wk \"+ str(DATEPART('week',[EST_IHD],'Monday')) + \"'\" + RIGHT(STR(DATEPART('year',[EST_IHD],'Monday')),2)\r\n\r\nWHEN 'MM' THEN  LEFT(DATENAME(\"month\",[EST_IHD]),3) + \"'\" + RIGHT(STR(DATEPART('year',[EST_IHD],'Monday')),2)\r\nEND"
+      },
+      {
+        "name": "Number of Records",
+        "caption": null,
+        "calculation": "1"
+      },
+      {
+        "name": "Retailer Cost (copy)",
+        "caption": null,
+        "calculation": "[Retailer_Cost]"
+      },
+      {
+        "name": "Comparison",
+        "caption": "Comparison",
+        "calculation": "\"Comparison Dashboard\""
+      }
+    ],
+    [
+      {
+        "name": "OR_LKP",
+        "caption": "OR_LKP",
+        "calculation": "IF \r\n(ZN([Order Rate]) - LOOKUP(ZN([Order Rate]), 1)) / ABS(LOOKUP(ZN([Order Rate]), 1)) <0 then -1 \r\nELSEIF (ZN([Order Rate]) - LOOKUP(ZN([Order Rate]), 1)) / ABS(LOOKUP(ZN([Order Rate]), 1)) = 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "Dealer Cost",
+        "caption": "Dealer Cost",
+        "calculation": "if [Mail Type] = \"Radius\" then\r\n0\r\nelse [MailQTY]*0.45*0.2\r\nend"
+      },
+      {
+        "name": "Hughes Cost",
+        "caption": "Hughes Cost",
+        "calculation": "if [Mail Type] = \"Radius\" then\r\n[MailQTY]*0.45\r\nelse [MailQTY]*0.45*0.8\r\nEND"
+      },
+      {
+        "name": "SAC",
+        "caption": "SAC",
+        "calculation": "[Cost per Dealer Order]+210+181"
+      },
+      {
+        "name": "Mon_yr",
+        "caption": "Mon_yr",
+        "calculation": "LEFT(DATENAME(\"month\",[EST_IHD]),3)+ \" - \" + RIGHT(STR([Year]),2)"
+      },
+      {
+        "name": "Color Code",
+        "caption": "Color Code",
+        "calculation": "str(year([Est_IHD])) + \"-\" + [Mail Type (copy)]"
+      },
+      {
+        "name": "KPIs_1K",
+        "caption": "KPIs_1K",
+        "calculation": "[KPIs 1]/1000"
+      },
+      {
+        "name": "Mon_yr",
+        "caption": "Mon_yr",
+        "calculation": "LEFT(DATENAME(\"month\",[Est_IHD]),3)+ \" - \" + RIGHT(STR([Year]),2)"
+      },
+      {
+        "name": "Qtr_yr",
+        "caption": "Qtr_yr",
+        "calculation": "\"Q\" + STR(DATEPART(\"quarter\",[Est_IHD],'monday'))+ \"-\" + RIGHT(STR([Year]),2)"
+      },
+      {
+        "name": "BST_FLAG",
+        "caption": "BST_FLAG",
+        "calculation": "CASE [Beam_Status_Today]\r\nWHEN 'GROWTH' THEN 'GROWTH'\r\nWHEN 'STANDARD' THEN 'STANDARD'\r\nWHEN 'MANAGED' THEN 'MANAGED'\r\nWHEN 'NO J2' THEN 'STANDARD'\r\nWHEN NULL THEN 'EXCLUDE'\r\nWHEN 'PR' THEN 'EXCLUDE'\r\nWHEN '-' THEN 'EXCLUDE'\r\nEND"
+      },
+      {
+        "name": "BSAT_FLAG",
+        "caption": "BSAT_FLAG",
+        "calculation": "CASE [Beam_Status_At_Time]\r\nWHEN 'GROWTH' THEN 'GROWTH'\r\nWHEN 'STANDARD' THEN 'STANDARD'\r\nWHEN 'MANAGED' THEN 'MANAGED'\r\nWHEN 'NO J2' THEN 'STANDARD'\r\nWHEN NULL THEN 'EXCLUDE'\r\nWHEN 'PR' THEN 'EXCLUDE'\r\nWHEN '-' THEN 'EXCLUDE'\r\nEND"
+      },
+      {
+        "name": "Color Code",
+        "caption": "Color Code",
+        "calculation": "str(year([EST_IHD])) + \"-\" + [Mail Type]"
+      },
+      {
+        "name": "[KPI_2]/1000",
+        "caption": "[KPI_2]/1000",
+        "calculation": "[KPI_2]/1000"
+      },
+      {
+        "name": "Color Code (copy)",
+        "caption": null,
+        "calculation": "str(year([Est_IHD])) + \"-\" + [Mail Type (copy)]"
+      },
+      {
+        "name": "AR_LKP",
+        "caption": "AR_LKP",
+        "calculation": "IF \r\n (ZN([Activation Rate]) - LOOKUP(ZN([Activation Rate]), 1)) / ABS(LOOKUP(ZN([Activation Rate]), 1)) <0 then -1 \r\nELSEIF (ZN([Activation Rate]) - LOOKUP(ZN([Activation Rate]), 1)) / ABS(LOOKUP(ZN([Activation Rate]), 1))= 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "CPDO_LKP",
+        "caption": "CPDO_LKP",
+        "calculation": "IF \r\n (ZN([Cost per Dealer Order]) - LOOKUP(ZN([Cost per Dealer Order]), 1)) / ABS(LOOKUP(ZN([Cost per Dealer Order]), 1)) <0 then -1 \r\nELSEIF (ZN([Cost per Dealer Order]) - LOOKUP(ZN([Cost per Dealer Order]), 1)) / ABS(LOOKUP(ZN([Cost per Dealer Order]), 1)) = 0 then 0 \r\nELSE 1 END"
+      },
+      {
+        "name": "RR_LKP",
+        "caption": "RR_LKP",
+        "calculation": "IF \r\n(ZN([Resp. Rate]) - LOOKUP(ZN([Resp. Rate]), 1)) / ABS(LOOKUP(ZN([Resp. Rate]), 1)) <0 then -1 \r\nELSEIF (ZN([Resp. Rate]) - LOOKUP(ZN([Resp. Rate]), 1)) / ABS(LOOKUP(ZN([Resp. Rate]), 1))= 0 then 0 \r\nELSE 1 END"
+      }
+    ],
+    [
+      {
+        "name": "Dealer Cost per Dealer Order",
+        "caption": "Dealer Cost per Dealer Order",
+        "calculation": "sum([Dealer Cost])/sum([DealerOrders])"
+      },
+      {
+        "name": "Hughes Cost per Dealer Order",
+        "caption": "Hughes Cost per Dealer Order",
+        "calculation": "sum([Hughes Cost])/SUM([DealerOrders])"
+      },
+      {
+        "name": "Yoy_Mon",
+        "caption": "Yoy_Mon",
+        "calculation": "IF MONTH([EST_IHD])= MONTH({ EXCLUDE YEAR([EST_IHD]),MONTH([EST_IHD]), [EST_IHD],[Mon_yr] :MAX([EST_IHD])} )\r\nand YEAR([EST_IHD])= YEAR({ EXCLUDE YEAR([EST_IHD]),MONTH([EST_IHD]), [EST_IHD],[Mon_yr] :MAX([EST_IHD])} )\r\nthen\r\n\"Current Month\"\r\nELSEIF \r\nMONTH([EST_IHD])= MONTH({ EXCLUDE YEAR([EST_IHD]),MONTH([EST_IHD]), [EST_IHD],[Mon_yr] :MAX([EST_IHD])} )\r\nand YEAR([EST_IHD])= YEAR({ EXCLUDE YEAR([EST_IHD]),MONTH([EST_IHD]), [EST_IHD],[Mon_yr] :MAX([EST_IHD])} )-1 then\r\n\"Previous Yr\"\r\nEND"
+      },
+      {
+        "name": "Yoy_Mon",
+        "caption": "Yoy_Mon",
+        "calculation": "IF MONTH([Est_IHD])= MONTH({ EXCLUDE YEAR([Est_IHD]),MONTH([Est_IHD]), [Est_IHD],[Mon_yr] :MAX([Est_IHD])} )\r\nand YEAR([Est_IHD])= YEAR({ EXCLUDE YEAR([Est_IHD]),MONTH([Est_IHD]), [Est_IHD],[Mon_yr] :MAX([Est_IHD])} )\r\nthen\r\n\"Current Month\"\r\nELSEIF \r\nMONTH([Est_IHD])= MONTH({ EXCLUDE YEAR([Est_IHD]),MONTH([Est_IHD]), [Est_IHD],[Mon_yr] :MAX([Est_IHD])} )\r\nand YEAR([Est_IHD])= YEAR({ EXCLUDE YEAR([Est_IHD]),MONTH([Est_IHD]), [Est_IHD],[Mon_yr] :MAX([Est_IHD])} )-1 then\r\n\"Previous Yr\"\r\nEND"
+      },
+      {
+        "name": "KPI_3",
+        "caption": "KPI_3",
+        "calculation": "CASE [Parameters].[KPI List 2 (copy)]\r\nWHEN \"CPDO\" THEN 0.45 *( SUM([MailQTY])/SUM([DealerOrders]) )\r\nWHEN \"CPDA\" THEN 0.45 *( sum([MailQTY])/SUM ([DealerActivations]) )\r\nWHEN \"HCPDO\" THEN sum([Hughes Cost]) / SUM([DealerOrders])\r\nWHEN \"DCPDO\" THEN sum([Dealer Cost])/sum([DealerOrders])\r\nWHEN \"SAC\" THEN (0.45 *( SUM([MailQTY])/SUM([DealerOrders]) ) ) + 210 + 181\r\nEND"
+      }
+    ]
+  ],
+  "name_map": {
+    "Calculation_239253744631144449": "Home",
+    "Calculation_239253744644227074": "TWG",
+    "Calculation_354939952060190720": "Year",
+    "Calculation_354939952060768257": "Cost per Call",
+    "Calculation_354939952061177858": "Resp. Rate",
+    "Calculation_365636011030982656": "Call",
+    "Calculation_365636011037294593": "Order",
+    "Calculation_366198961398657036": "Date Range",
+    "Calculation_458804226223980544": "zero",
+    "Calculation_458804226252173315": "Month_1",
+    "Calculation_50665510685159424": "Mail",
+    "Calculation_50665510709448707": "Yoy_Mon",
+    "Calculation_50665510719471623": "MQ_LKP",
+    "Calculation_582090258563346432": "Cost per 1000 Pieces",
+    "Calculation_582090258952601605": "Monthly / Weekly View/BDN",
+    "Calculation_582090258992340998": "Color Code",
+    "Calculation_620933806086488065": "KPI 1",
+    "Calculation_659777359957889024": "Mail Qty_str",
+    "Calculation_687924868245344256": "test",
+    "Calculation_705939251089170433": "KPIs_1K",
+    "Calculation_705939251091283971": "Month",
+    "Calculation_705939251091521540": "Quarter",
+    "Calculation_707628116633915392": "Hughes",
+    "Calculation_707628116645822465": "FA",
+    "Calculation_712413180615208960": "Mon_yr",
+    "Calculation_712413180615495681": "cpd_mon",
+    "Calculation_712413180617924610": "Qtr_yr",
+    "Calculation_712413180620513284": "index",
+    "Calculation_712413180621713413": "CAlc_0",
+    "Calculation_712413180622938119": "TC_LKP",
+    "Color Code (copy)": "Color Code (copy)",
+    "Count (copy)": "Count (copy)",
+    "Est IHD (copy)": "Est IHD (copy)",
+    "KPIs (copy)": "KPIs 1",
+    "Mail Type (copy)": "Mail Type (copy)",
+    "Month_2 (copy)": "Month_end",
+    "Month_end (copy)": "Month_strt",
+    "Monthly / Weekly View (copy)": "Monthly / Weekly View /BDN",
+    "Number of Records": "Number of Records",
+    "Retailer Cost (copy)": "Retailer Cost (copy)",
+    "TC_LKP (copy)": "RR_LKP",
+    "TWG (copy)": "Comparison",
+    "Beam_Status_At_Time (copy)": "Beam_Status_Today",
+    "Beam_Status_At_Time (group)": "Beam_Status_At_Time (group)",
+    "Beam_Status_Today (group) 1": "Beam_Status_Today_Final",
+    "CPDO_LKP (copy)": "OR_LKP",
+    "Calculation_239253744652668931": "Matchback Navigation 1",
+    "Calculation_239253744653062148": "Matchback Navigation 2",
+    "Calculation_240098171710910465": "DA_LKP",
+    "Calculation_354939952070057987": "Year",
+    "Calculation_354939952076820484": "Activation Rate",
+    "Calculation_354939952077275141": "Cost per Dealer Activation",
+    "Calculation_354939952077467654": "Cost per Dealer Order",
+    "Calculation_354939952077586439": "Dealer Cost",
+    "Calculation_354939952077717512": "Dealer Cost per Dealer Order",
+    "Calculation_354939952077893641": "Hughes Cost",
+    "Calculation_354939952078045194": "Hughes Cost per Dealer Order",
+    "Calculation_354939952078143499": "Order Rate",
+    "Calculation_354939952078249996": "SAC",
+    "Calculation_365636011040665602": "Order",
+    "Calculation_365636011043131395": "MB",
+    "Calculation_365636011108364294": "Mon_yr",
+    "Calculation_365636011110227976": "Yoy_Mon",
+    "Calculation_365636011126050825": "CAlc_0",
+    "Calculation_365636011127234571": "DO_LKP",
+    "Calculation_365636011131351052": "Index",
+    "Calculation_366198961371631627": "Mail Type Aliased",
+    "Calculation_369295186755690496": "Date Range",
+    "Calculation_458804226265014276": "Month_1",
+    "Calculation_620089415473332224": "Test_Date",
+    "Calculation_659777359958810625": "Zero",
+    "Calculation_659777359960813570": "Mail Qty_Str",
+    "Calculation_733242341999394817": "MOY_Merge",
+    "Calculation_733242341999923202": "Beam_Status_At_Time",
+    "Calculation_733242342003195907": "BST_FLAG",
+    "Calculation_733242342003982340": "BSAT_FLAG",
+    "Calculation_758856546811756544": "KPI_2",
+    "Calculation_758856546812760065": "Monthly / Weekly View",
+    "Calculation_758856546813870082": "Color Code",
+    "Calculation_758856546817720324": "KPI 2",
+    "Calculation_758856546820091909": "[KPI_2]/1000",
+    "Calculation_784752293704478720": "Button",
+    "Calculation_861031963391651840": "KPI_3",
+    "Calculation_861031963393986561": "KPI 3",
+    "DA_LKP (copy 2)": "AR_LKP",
+    "DA_LKP (copy)": "CPDO_LKP",
+    "Mail Categ": "Mail Type"
+  },
+  "dependencies": {
+    "Calculation_239253744631144449": [],
+    "Calculation_239253744644227074": [],
+    "Calculation_354939952060190720": [],
+    "Calculation_354939952060768257": [],
+    "Calculation_354939952061177858": [],
+    "Calculation_365636011030982656": [],
+    "Calculation_365636011037294593": [],
+    "Calculation_366198961398657036": [],
+    "Calculation_458804226223980544": [],
+    "Calculation_458804226252173315": [],
+    "Calculation_50665510685159424": [],
+    "Calculation_50665510709448707": [
+      "Calculation_712413180615208960"
+    ],
+    "Calculation_50665510719471623": [],
+    "Calculation_582090258563346432": [],
+    "Calculation_582090258952601605": [],
+    "Calculation_582090258992340998": [
+      "Mail Type (copy)"
+    ],
+    "Calculation_620933806086488065": [],
+    "Calculation_659777359957889024": [],
+    "Calculation_687924868245344256": [],
+    "Calculation_705939251089170433": [
+      "KPIs (copy)"
+    ],
+    "Calculation_705939251091283971": [],
+    "Calculation_705939251091521540": [],
+    "Calculation_707628116633915392": [],
+    "Calculation_707628116645822465": [],
+    "Calculation_712413180615208960": [
+      "Calculation_354939952060190720"
+    ],
+    "Calculation_712413180615495681": [],
+    "Calculation_712413180617924610": [
+      "Calculation_354939952060190720"
+    ],
+    "Calculation_712413180620513284": [],
+    "Calculation_712413180621713413": [],
+    "Calculation_712413180622938119": [],
+    "Color Code (copy)": [
+      "Mail Type (copy)"
+    ],
+    "Count (copy)": [],
+    "Est IHD (copy)": [],
+    "KPIs (copy)": [],
+    "Mail Type (copy)": [],
+    "Month_2 (copy)": [],
+    "Month_end (copy)": [],
+    "Monthly / Weekly View (copy)": [],
+    "Number of Records": [],
+    "Retailer Cost (copy)": [],
+    "TC_LKP (copy)": [
+      "Calculation_354939952061177858"
+    ],
+    "TWG (copy)": [],
+    "Beam_Status_At_Time (copy)": [],
+    "Beam_Status_At_Time (group)": [],
+    "Beam_Status_Today (group) 1": [],
+    "CPDO_LKP (copy)": [
+      "Calculation_354939952078143499"
+    ],
+    "Calculation_239253744652668931": [],
+    "Calculation_239253744653062148": [],
+    "Calculation_240098171710910465": [],
+    "Calculation_354939952070057987": [],
+    "Calculation_354939952076820484": [],
+    "Calculation_354939952077275141": [],
+    "Calculation_354939952077467654": [],
+    "Calculation_354939952077586439": [
+      "Mail Categ"
+    ],
+    "Calculation_354939952077717512": [
+      "Calculation_354939952077586439"
+    ],
+    "Calculation_354939952077893641": [
+      "Mail Categ"
+    ],
+    "Calculation_354939952078045194": [
+      "Calculation_354939952077893641"
+    ],
+    "Calculation_354939952078143499": [],
+    "Calculation_354939952078249996": [
+      "Calculation_354939952077467654"
+    ],
+    "Calculation_365636011040665602": [],
+    "Calculation_365636011043131395": [],
+    "Calculation_365636011108364294": [
+      "Calculation_354939952070057987"
+    ],
+    "Calculation_365636011110227976": [
+      "Calculation_365636011108364294"
+    ],
+    "Calculation_365636011126050825": [],
+    "Calculation_365636011127234571": [],
+    "Calculation_365636011131351052": [],
+    "Calculation_366198961371631627": [],
+    "Calculation_369295186755690496": [],
+    "Calculation_458804226265014276": [],
+    "Calculation_620089415473332224": [],
+    "Calculation_659777359958810625": [],
+    "Calculation_659777359960813570": [],
+    "Calculation_733242341999394817": [],
+    "Calculation_733242341999923202": [],
+    "Calculation_733242342003195907": [
+      "Beam_Status_At_Time (copy)"
+    ],
+    "Calculation_733242342003982340": [
+      "Calculation_733242341999923202"
+    ],
+    "Calculation_758856546811756544": [],
+    "Calculation_758856546812760065": [],
+    "Calculation_758856546813870082": [
+      "Mail Categ"
+    ],
+    "Calculation_758856546817720324": [],
+    "Calculation_758856546820091909": [
+      "Calculation_758856546811756544"
+    ],
+    "Calculation_784752293704478720": [],
+    "Calculation_861031963391651840": [
+      "Calculation_354939952077586439",
+      "Calculation_354939952077893641"
+    ],
+    "Calculation_861031963393986561": [],
+    "DA_LKP (copy 2)": [
+      "Calculation_354939952076820484"
+    ],
+    "DA_LKP (copy)": [
+      "Calculation_354939952077467654"
+    ],
+    "Mail Categ": []
+  }
+}

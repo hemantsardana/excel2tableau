@@ -1,0 +1,147 @@
+// DAX query file generated from provided calculated fields (Excel list)
+// Note: This file is intentionally not referenced from table .tmdl files.
+// You can run individual queries in DAX Query View / SSMS / DAX Studio.
+//
+// Assumed table/column mappings based on workspace CSV schema:
+// - Customer[Customer ID]           ~ Tableau [Customer_ID]
+// - Customer[Tenure Months]         ~ Tableau [Tenure_Months]
+// - Transactions[Quantity]          ~ Tableau [Quantity]
+// - Transactions[Avg Price]         ~ Tableau [Avg_Price]
+// - Transactions[Coupon Status]     ~ Tableau [Coupon_Status]
+// - Product[Product Description]    ~ Tableau [Product_Description]
+//
+// If your semantic model uses different names, adjust the column references below.
+
+-- =====================================
+-- Measures (aggregations)
+-- =====================================
+
+// Calculation_1890948924302123009
+// Total Customers = COUNTD([Customer_ID])
+MEASURE 'Customer'[Total Customers] =
+    DISTINCTCOUNT ( 'Customer'[Customer ID] )
+
+// Calculation_1890948924302376962
+// Total Units Sold = SUM(Quantity)
+MEASURE 'Transactions'[Total Units Sold] =
+    SUM ( 'Transactions'[Quantity] )
+
+// Calculation_816277463579885569
+// Total Sales (USD) = SUM([Avg_Price] * [Quantity])
+MEASURE 'Transactions'[Total Sales (USD)] =
+    SUMX (
+        'Transactions',
+        'Transactions'[Avg Price] * 'Transactions'[Quantity]
+    )
+
+// Calculation_42221277663760386
+// Average Transactional Value (ATV) = [Total Sales (USD)] / [Total Units Sold]
+MEASURE 'Transactions'[Average Transactional Value (ATV)] =
+    DIVIDE (
+        [Total Sales (USD)],
+        [Total Units Sold]
+    )
+
+-- =====================================
+-- Columns (row-level calculated fields)
+-- =====================================
+
+// Calculation_2232659546737020939
+// Used Coupons = IF Coupon_Status == "Used" THEN 1 ELSE 0
+COLUMN 'Transactions'[Used Coupons] =
+    IF ( 'Transactions'[Coupon Status] = "Used", 1, 0 )
+
+// Used Coupons (copy)_2232659546740482060
+// Clicked Coupons = IF Coupon_Status == "Clicked" THEN 1 ELSE 0
+COLUMN 'Transactions'[Clicked Coupons] =
+    IF ( 'Transactions'[Coupon Status] = "Clicked", 1, 0 )
+
+// Calculation_950259549625729025
+// Tenure Range bucketing
+COLUMN 'Customer'[Tenure Range (Calculated)] =
+    VAR m = 'Customer'[Tenure Months]
+    RETURN
+        SWITCH (
+            TRUE (),
+            m <= 12, "0-12 months",
+            m <= 24, "13-24 months",
+            m <= 36, "25-36 months",
+            "Over 36 months"
+        )
+
+-- =====================================
+-- Tableau FIXED LOD equivalents
+-- =====================================
+// Tableau FIXED LOD calculations do not map 1:1 to measures without context.
+// Below are DAX patterns to reproduce the intent.
+
+// Calculation_2232659546626289668
+// "Most Profitable Product" = { FIXED [Product_Description] : SUM([Quantity] * [Avg_Price]) }
+// DAX: total sales by product, ignoring other filters except product.
+MEASURE 'Product'[Most Profitable Product Sales] =
+    CALCULATE (
+        [Total Sales (USD)],
+        ALLEXCEPT ( 'Product', 'Product'[Product Description] )
+    )
+
+// Optional helper: returns the name of the top product by sales in current report context.
+MEASURE 'Product'[Most Profitable Product (Name)] =
+    VAR t =
+        TOPN (
+            1,
+            VALUES ( 'Product'[Product Description] ),
+            [Most Profitable Product Sales],
+            DESC
+        )
+    RETURN
+        MAXX ( t, 'Product'[Product Description] )
+
+// Calculation_42221277678399500
+// "Average Tenure" = { FIXED [Customer_ID] : SUM([Tenure_Months]) }
+// This LOD is effectively "tenure per customer" (fixed by customer).
+// If you want the average across customers in current context:
+MEASURE 'Customer'[Average Tenure (Months)] =
+    AVERAGEX (
+        VALUES ( 'Customer'[Customer ID] ),
+        CALCULATE ( SUM ( 'Customer'[Tenure Months] ) )
+    )
+
+-- =====================================
+-- INDEX() <= N Filters (Tableau)
+-- =====================================
+// Tableau INDEX() is a table calc. In Power BI, replicate via:
+// - a rank measure, then a visual-level filter Rank <= N.
+
+// Calculation_300615303085158406
+// Top 10 Filter = INDEX() <= 10
+MEASURE 'Product'[Rank by Sales] =
+    RANKX (
+        ALL ( 'Product'[Product Description] ),
+        [Total Sales (USD)],
+        ,
+        DESC,
+        Dense
+    )
+
+MEASURE 'Product'[Top 10 Filter] =
+    IF ( [Rank by Sales] <= 10, 1, 0 )
+
+// Top 10 Filter (copy)_42221277683306509
+MEASURE 'Product'[Top 5 Filter] =
+    IF ( [Rank by Sales] <= 5, 1, 0 )
+
+// Top 5 Filter (copy)_2232659546626781191
+MEASURE 'Product'[Top 1 Filter] =
+    IF ( [Rank by Sales] <= 1, 1, 0 )
+
+-- =====================================
+-- Example EVALUATE queries (optional)
+-- =====================================
+// Uncomment and run as needed.
+//
+// EVALUATE
+// SUMMARIZECOLUMNS(
+//     'Product'[Product Description],
+//     "Sales", [Total Sales (USD)],
+//     "Rank", [Rank by Sales]
+// )

@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "f2e13123-4219-4c98-b1df-b6b002dde174",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 284,
+            "y": 50
+          },
+          "nodeIndex": "Cost Per Call Parameter",
+          "nodeLineageTag": "99893427-9e51-4927-890f-1fa133e877a8",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 568,
+            "y": 0
+          },
+          "nodeIndex": "Extract",
+          "nodeLineageTag": "d3974d9f-93a1-4280-845b-8cad529ed18e",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 852,
+            "y": 0
+          },
+          "nodeIndex": "Extract_1",
+          "nodeLineageTag": "48f77322-8082-4ef9-bcd2-074129588878",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1136,
+            "y": 50
+          },
+          "nodeIndex": "KPI List (copy)",
+          "nodeLineageTag": "1837b0fa-22e9-427a-9c95-e2f8f5f2447c",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1420,
+            "y": 50
+          },
+          "nodeIndex": "KPI List 2 (copy)",
+          "nodeLineageTag": "6a5328f8-61c0-401b-aeb5-f3ca81a04056",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1704,
+            "y": 50
+          },
+          "nodeIndex": "Monthly / Weekly View  (copy 2)",
+          "nodeLineageTag": "3ea0ead1-4bbc-4e66-9dcb-59e9597f4ec2",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1988,
+            "y": 50
+          },
+          "nodeIndex": "Monthly / Weekly View  (copy)",
+          "nodeLineageTag": "99a14532-3aff-435c-914f-be4dcecf8c3d",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2272,
+            "y": 50
+          },
+          "nodeIndex": "Start Date (copy 2)",
+          "nodeLineageTag": "2d603e5d-1c53-453b-b22e-62aadedab11e",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2556,
+            "y": 50
+          },
+          "nodeIndex": "Start Date_1 (copy)",
+          "nodeLineageTag": "817806ca-52a8-4363-8c67-dc2a4da000bf",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2840,
+            "y": 74
+          },
+          "nodeIndex": "Month/Weekly Param",
+          "nodeLineageTag": "d0eb2620-c693-4bbd-a024-31229a5728d9",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 3124,
+            "y": 144
+          },
+          "nodeIndex": "month/week kpi-2",
+          "nodeLineageTag": "c409831f-0a00-4714-874c-06ae95a36300",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

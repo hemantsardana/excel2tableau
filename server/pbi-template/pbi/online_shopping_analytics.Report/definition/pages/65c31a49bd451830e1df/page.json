@@ -1,0 +1,13 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/page/2.0.0/schema.json",
+  "name": "65c31a49bd451830e1df",
+  "displayName": "Consumer Spending",
+  "displayOption": "FitToPage",
+  "height": 720,
+  "width": 1280,
+  "pageBinding": {
+    "name": "2bd1a6f2cccc52adc3c7",
+    "type": "Default",
+    "parameters": []
+  }
+}

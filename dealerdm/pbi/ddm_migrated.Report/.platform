@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "ddm_migrated"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7381d8b0-f844-45da-936d-fed9d22770a8"
+  }
+}

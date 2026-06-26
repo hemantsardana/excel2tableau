@@ -1,0 +1,41 @@
+table Product
+	lineageTag: 42e80c38-6162-4917-9d12-4baea2b4fe2b
+
+	column 'Product Category'
+		dataType: string
+		lineageTag: febcde6a-6e52-4f82-bd16-59e678c0d58d
+		summarizeBy: none
+		sourceColumn: Product Category
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product Description'
+		dataType: string
+		lineageTag: 5517172c-5475-4476-979d-2b546c25a6f1
+		summarizeBy: none
+		sourceColumn: Product Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Product SKU'
+		dataType: string
+		lineageTag: d4cf1de5-604c-42c8-8222-c1332da3ff23
+		summarizeBy: none
+		sourceColumn: Product SKU
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Product = m
+		mode: import
+		source =
+				let
+				    // BigQuery source: project ai-tab2looker-usc1-ri, dataset online_shopping, table product
+				    Source = GoogleBigQuery.Database(){[Name="ai-tab2looker-usc1-ri"]}[Data]{[Name="online_shopping"]}[Data]{[Name="product"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Product Category", type text}, {"Product Description", type text}, {"Product SKU", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

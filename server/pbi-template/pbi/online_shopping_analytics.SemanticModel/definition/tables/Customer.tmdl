@@ -1,0 +1,78 @@
+table Customer
+	lineageTag: 95a97e58-e2a2-485f-855a-b903b682d922
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 30dd8be6-0891-4995-afc7-b14fe251dd3d
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Gender
+		dataType: string
+		lineageTag: 8a744ab9-5f96-45a4-8aeb-004ca8b210ba
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: dc5a8354-f568-4928-a795-c4d9f48c1ed1
+		summarizeBy: none
+		sourceColumn: Location
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Tenure Range'
+		dataType: string
+		lineageTag: b010287b-87ae-4ac0-be3a-1e8e97dfd6ff
+		summarizeBy: none
+		sourceColumn: Tenure Range
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Offline_Spend (Customer)'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c19c8c7-e75b-4dab-bffd-ffc14bb61ef2
+		summarizeBy: none
+		sourceColumn: Offline_Spend (Customer)
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Online_Spend (Customer)'
+		dataType: double
+		lineageTag: dea9198d-e1fc-4c8a-b908-04515171f4e1
+		summarizeBy: none
+		sourceColumn: Online_Spend (Customer)
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Tenure Months'
+		dataType: int64
+		formatString: 0
+		lineageTag: d3a92e70-f73f-431b-b405-c9015a864abc
+		summarizeBy: none
+		sourceColumn: Tenure Months
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer = m
+		mode: import
+		source =
+				let
+				    // BigQuery source: project ai-tab2looker-usc1-ri, dataset online_shopping, table customer
+				    Source = GoogleBigQuery.Database(){[Name="ai-tab2looker-usc1-ri"]}[Data]{[Name="online_shopping"]}[Data]{[Name="customer"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Customer ID", Int64.Type}, {"Gender", type text}, {"Location", type text}, {"Tenure Range", type text}, {"Offline_Spend (Customer)", Int64.Type}, {"Online_Spend (Customer)", type number}, {"Tenure Months", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+
